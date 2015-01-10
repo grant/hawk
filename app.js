@@ -34,11 +34,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/profile',
-  failureRedirect: '/'
-}));
+app.get('/auth/facebook', passport.authenticate("facebook", {scope:'email'}));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/error' }), routes.authSuccess);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
