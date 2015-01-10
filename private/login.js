@@ -2,9 +2,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 module.exports = function (passport) {
   passport.use(new FacebookStrategy({
-      clientID: FACEBOOK_APP_ID,
-      clientSecret: FACEBOOK_APP_SECRET,
-      callbackURL: "http://localhost:3000/auth/facebook/callback"
+      clientID: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
+      callbackURL: process.env.FACEBOOK_CALLBACK_URL
     },
     function(accessToken, refreshToken, profile, done) {
       User.findOrCreate({ facebookId: profile.id }, function (err, user) {

@@ -5,13 +5,14 @@
 
 var express = require('express');
 var passport = require('passport');
-// var login = require('./private/login')(passport);
+var login = require('./private/login')(passport);
 var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
 var app = express();
+require('dotenv').load();
 
 // all environments
 
@@ -33,7 +34,11 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/profile',
+  failureRedirect: '/'
+}));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
