@@ -8,7 +8,7 @@ module.exports = function (passport) {
       profileFields: ['id', 'emails', 'displayName', 'photos']
     },
     function(accessToken, refreshToken, profile, done) {
-      done(err, profile);
+      done(null, profile);
       // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
       //   return done(err, user);
       // });
