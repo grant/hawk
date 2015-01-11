@@ -3,6 +3,7 @@ var AuthKey = '0d53368f-1280-4f4c-b16b-ea191ec4c6a3',
 	TripDataSchema = require('../private/models/tripdata'),
 	TripSchema = require('../private/models/trips'),
 	AlertSchema = require('../private/models/alerts'),
+	moment = require('moment'),
 	GeoDist = require('geodist'),
 	HOME_COORD = {lat: 37.571633, lng: -122.418558},
 	RADIUS = 10;
@@ -74,8 +75,9 @@ var getalerts = function (req, res) {
 				result.push({
 					name : 'Speeding',
 					time : new Date(data[i].Time).getTime(),
+					relative_time: moment(new Date(data[i].Time).getTime()).fromNow(),
 					TripId: data[i].TripId,
-					info : 'Car is going at ' + data[i].Speed + ' and the Speed Limit is ' + data[i].SpeedLimit
+					info : 'Car is going at ' + data[i].Speed + 'kmph and the Speed Limit is ' + data[i].SpeedLimit + 'kmph'
 				});
 			}
 
@@ -86,6 +88,7 @@ var getalerts = function (req, res) {
 				result.push({
 					name : 'Out of Region',
 					time : new Date(data[i].Time).getTime(),
+					relative_time: moment(new Date(data[i].Time).getTime()).fromNow(),
 					TripId: data[i].TripId,
 					info : 'Car is ' + diff + 'km far from home'
 				});
