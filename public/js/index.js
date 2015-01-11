@@ -1,5 +1,6 @@
 $(function () {
   var ROT_STRENGTH = 40;
+  var rotateInterval;
   function setupLogin () {
     var $movingBg = $('.moving-bg');
     var width = $movingBg.width();
@@ -12,7 +13,7 @@ $(function () {
       $movingBg.css('margin-left', (ROT_STRENGTH * vx) + (-width / 2));
     }
 
-    setInterval(function () {
+    rotateInterval = setInterval(function () {
       alignBg();
     }, 17);
 
@@ -25,6 +26,7 @@ $(function () {
 
   function teardownLogin () {
     window.ondevicemotion = null;
+    clearInterval(rotateInterval);
   }
 
   setupLogin();
