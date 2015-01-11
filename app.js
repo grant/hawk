@@ -54,6 +54,7 @@ app.get('/auth/facebook', passport.authenticate("facebook", {scope:'email'}));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/error' }), routes.authSuccess);
 app.get('/api/getdata', mojio.getDataRoute);
 app.get('/api/alerts', mojio.getAlertsRoute);
+app.get('/api/location', mojio.getLocation);
 
 setInterval(function () {
   mojio.getData(function (data) {

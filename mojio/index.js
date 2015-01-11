@@ -7,7 +7,8 @@ var AuthKey = '0d53368f-1280-4f4c-b16b-ea191ec4c6a3',
 	GeoDist = require('geodist'),
 	HOME_COORD = {lat: 37.571633, lng: -122.418558},
 	RADIUS = 10,
-	delay = 300000;
+	delay = 300000,
+	location = {lat: 37.571633, lng: -122.418558};
 
 var getDataRoute = function (req, res) {
 	getData(function (data) {
@@ -50,6 +51,11 @@ var getData = function (cb) {
 				TemperatureOutside: rawdata.TemperatureOutside
 			};
 
+
+			location.lat = tripsData.Location.Lat;
+			location.lng = tripsData.Location.Lng;
+			console.log(location.lat, location.lng);
+
 			getSpeedLimitFunction(rawdata.Location.Lat, rawdata.Location.Lng,
 				function(speedlim){
 					tripsData.SpeedLimit = speedlim;
@@ -68,6 +74,10 @@ var getData = function (cb) {
 		}
 	});
 };
+
+var getLocation = function (req, res) {
+	res.json(location);
+}
 
 var getAlerts = function (cb) {
 	TripDataSchema.find({}, function(error, data){
@@ -138,7 +148,10 @@ module.exports = {
 	getSpeedLimit: getSpeedLimitFunction,
 
 	getData: getData,
+
 	getDataRoute: getDataRoute,
+
+	getLocation: getLocation,
 
 	getAlerts: getAlerts,
 	getAlertsRoute: getAlertsRoute,
@@ -160,7 +173,6 @@ var getSpeedLimitFunction = function (lat, lng, cb) {
 			if(data.Response.Link[0].SpeedLimit){
 				cb(data.Response.Link[0].SpeedLimit);
 			} else if(data.Response.Link[0].DynamicSpeedInfo.BaseSpeed) {
-				console.log(data.Response.Link[0].DynamicSpeedInfo.BaseSpeed);
 				cb(data.Response.Link[0].DynamicSpeedInfo.BaseSpeed);
 			} else {
 				console.log('nope nothing');
