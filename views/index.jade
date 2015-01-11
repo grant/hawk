@@ -36,7 +36,11 @@ block content
         .map-dot-container
           img.map-dot(src='/img/bmwlogo.png')
         .scroll-area
-          ul.events.list
+          if alerts
+            - var max = 0;
+            - for alert in alerts
+              - max = Math.max(max, alert.time)
+          ul.events.list(data-time=max)
             if alerts
               for alert in alerts
                 li.event

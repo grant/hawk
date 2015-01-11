@@ -91,7 +91,7 @@ var getAlerts = function (cb) {
 		var lastGeoTime = 0;
 		var lastBattTime = 0;
 		for (var i in data) {
-			
+
 			var iTime = new Date(data[i].Time).getTime();
 
 			if(data[i].Speed - data[i].SpeedLimit > 5 && iTime >= lastSpeedTime + delay){

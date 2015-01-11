@@ -30,12 +30,14 @@ $(function () {
   }
 
   function setupHome () {
+    // Sets up map view
     $('.back-page').click(function (e) {
       if ($(e.target).hasClass('back-page')) {
         $('.back-page').toggleClass('map-view');
       }
     });
 
+    var lastTime = $('.events.list').data('time');
     var map;
     function initialize() {
 
@@ -44,6 +46,24 @@ $(function () {
           console.log('update: ');
           console.log(location);
           map.setCenter(google.maps.LatLng(location.lat, location.lng));
+        });
+      }
+
+      function updateAlerts () {
+        $.get('/api/alerts', function (alerts) {
+          alerts = alerts.filter(function (a) {
+            return a.time > lastTime;
+          });
+
+          for (var i in alerts) {
+            var alert = alerts[i];
+            $alert = $('<li class="event"> <div class="top line"></div> <div class="bottom line"></div> <div class="icon-area"> <div class="icon"><i class="fa fa-power-off"></i></div> <div class="pic"><img src="/img/hannah.jpg" width="25px"/></div> </div> <div class="info"> <h3 class="title">title</h3> <div class="description">d</div> </div> <div class="time">time</div> </li>'); $alert.find('.title').text(alert.name);
+            $alert.find('.description').text(alert.info);
+            $alert.find('.time').text(alert.relative_time);
+            $('.events.list').prepend($alert.hide().fadeIn().css('margin-top', '-90px').animate({
+              'margin-top': '0'
+            }, 500));
+          }
         });
       }
 
@@ -67,6 +87,7 @@ $(function () {
 
       setInterval(function () {
         updateCenter();
+        updateAlerts();
       }, 15000);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
