@@ -45,7 +45,8 @@ $(function () {
         $.get('/api/location', function (location) {
           console.log('update: ');
           console.log(location);
-          map.setCenter(google.maps.LatLng(location.lat, location.lng));
+          var panPoint = new google.maps.LatLng(location.lat, location.lng);
+          map.panTo(panPoint);
         });
       }
 
@@ -55,6 +56,12 @@ $(function () {
             return a.time > lastTime;
           });
 
+          if (alerts.length > 0) {
+            $.post('/twilio', {
+              msg: 'Watch your kids! ' + alerts[0].name + '! ' + alerts[0].info + '.'
+            });
+          }
+
           for (var i in alerts) {
             var alert = alerts[i];
             $alert = $('<li class="event"> <div class="top line"></div> <div class="bottom line"></div> <div class="icon-area"> <div class="icon"><i class="fa fa-power-off"></i></div> <div class="pic"><img src="/img/hannah.jpg" width="25px"/></div> </div> <div class="info"> <h3 class="title">title</h3> <div class="description">d</div> </div> <div class="time">time</div> </li>'); $alert.find('.title').text(alert.name);
@@ -63,9 +70,6 @@ $(function () {
             $('.events.list').prepend($alert.hide().fadeIn().css('margin-top', '-90px').animate({
               'margin-top': '0'
             }, 500));
-            $.post('/twilio', {
-              msg: 'Watch your kids! ' + alert.name + '! ' + alert.info + '.'
-            });
           }
         });
       }
@@ -91,7 +95,7 @@ $(function () {
       setInterval(function () {
         updateCenter();
         updateAlerts();
-      }, 10000);
+      }, 15000);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
   }
