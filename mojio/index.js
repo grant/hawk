@@ -124,6 +124,8 @@ var getAlerts = function (cb) {
 			}
 		}
 
+		result.sort(function(a, b){ return b.time - a.time });
+
 		cb(result);
 	});
 };
