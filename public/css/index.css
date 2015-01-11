@@ -9,6 +9,7 @@
 
 .page {
   position: absolute;
+  text-align: center;
 }
 
 .page:not(.show) {
@@ -47,13 +48,22 @@
   left: 5%;
 }
 
-.page.login .logo, .page.login .login.button {
+.page.login .logo, .page.login .login.button, .page.login .title {
   position: absolute;
   margin: 0 auto;
 }
 
 .page.login .logo {
   top: 10%;
+}
+
+.page.login .title {
+  top: 40%;
+  width: 100%;
+  font-size: 70px;
+  font-family: "brandon-grotesque", sans-serif;
+  font-weight: 100;
+  color: white;
 }
 
 .page.login .login.button {
