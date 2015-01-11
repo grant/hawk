@@ -97,8 +97,6 @@ var getAlerts = function (cb) {
 			}
 
 			var diff = GeoDist(HOME_COORD, {lat : data[i].Location.Lat, lng: data[i].Location.Lng}, {exact: true, unit: 'km'}) - RADIUS;
-			console.log({lat : data[i].Location.Lat, lng: data[i].Location.Lng});
-			console.log(diff);
 			if(diff > 0 && iTime >= lastGeoTime + delay){
 				result.push({
 					name : 'Out of Region',
