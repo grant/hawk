@@ -9,7 +9,7 @@ $(function () {
 
     function alignBg () {
       // ease vx
-      vx += (rotx - vx) * 0.05;
+      vx += (rotx - vx) * 0.1;
       $movingBg.css('margin-left', (ROT_STRENGTH * vx) + (-width / 2));
     }
 
