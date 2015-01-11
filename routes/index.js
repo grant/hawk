@@ -3,6 +3,8 @@
  * GET home page.
  */
 
+var mojio = require('../mojio');
+
 // Login page (go to login even if already logged in)
 exports.index = function(req, res){
   res.render('index', {
@@ -12,8 +14,13 @@ exports.index = function(req, res){
 
 // Home page
 exports.home = function(req, res){
-  res.render('index', {
-    page: 'home'
+  mojio.getAlerts(function (alerts) {
+    console.log(alerts[0]);
+    res.render('index', {
+      page: 'home',
+      alerts: alerts,
+      user: req.user
+    });
   });
 };
 

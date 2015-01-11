@@ -30,9 +30,10 @@ $(function () {
   }
 
   function setupHome () {
-    console.log('hi');
-    $('.map').click(function (e) {
-      $('.back-page').toggleClass('map-view');
+    $('.back-page').click(function (e) {
+      if ($(e.target).hasClass('back-page')) {
+        $('.back-page').toggleClass('map-view');
+      }
     });
   }
 

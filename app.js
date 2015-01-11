@@ -52,9 +52,14 @@ app.get('/', routes.index);
 app.get('/home', routes.home);
 app.get('/auth/facebook', passport.authenticate("facebook", {scope:'email'}));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/error' }), routes.authSuccess);
-app.get('/api/getdata', mojio.getData);
-app.get('/api/alerts', mojio.getAlerts);
+app.get('/api/getdata', mojio.getDataRoute);
+app.get('/api/alerts', mojio.getAlertsRoute);
 
+setInterval(function () {
+  mojio.getData(function (data) {
+    // do nothing
+  });
+}, 3000);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
