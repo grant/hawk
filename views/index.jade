@@ -31,29 +31,31 @@ block content
         ul.list
           li.setting-area
       .back-page
-        .map#map
+        .map-container
+          .map#map
         .scroll-area
           ul.events.list
-            for alert in alerts
-              li.event
-                .top.line
-                .bottom.line
-                .icon-area
-                  .icon
-                    if alert.key == 'start'
-                      i.fa.fa-power-off
-                    if alert.key == 'speed'
-                      i.fa.fa-exclamation-triangle
-                    if alert.key == 'geo'
-                      i.fa.fa-location-arrow
-                    if alert.key == 'battery'
-                      i.fa.fa-plug
-                  .pic
-                    if Math.random() > 0.5
-                      img(src='/img/ayush.jpg', width='25px')
-                    else
-                      img(src='/img/hannah.jpg', width='25px')
-                .info
-                  h3.title= alert.name
-                  .description= alert.info
-                .time= alert.relative_time
+            if alerts
+              for alert in alerts
+                li.event
+                  .top.line
+                  .bottom.line
+                  .icon-area
+                    .icon
+                      if alert.key == 'start'
+                        i.fa.fa-power-off
+                      if alert.key == 'speed'
+                        i.fa.fa-exclamation-triangle
+                      if alert.key == 'geo'
+                        i.fa.fa-location-arrow
+                      if alert.key == 'battery'
+                        i.fa.fa-plug
+                    .pic
+                      if Math.random() > 0.5
+                        img(src='/img/ayush.jpg', width='25px')
+                      else
+                        img(src='/img/hannah.jpg', width='25px')
+                  .info
+                    h3.title= alert.name
+                    .description= alert.info
+                  .time= alert.relative_time
