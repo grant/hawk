@@ -14,7 +14,8 @@ exports.index = function(req, res){
 
 // Home page
 exports.home = function(req, res){
-  mojio.getData(function (alerts) {
+  mojio.getAlerts(function (alerts) {
+    console.log(alerts[0]);
     res.render('index', {
       page: 'home',
       alerts: alerts,
