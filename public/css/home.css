@@ -22,6 +22,21 @@
   background-color: rgba(246,164,99, .95);
 }
 
+.map-dot-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.map-dot {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: orange;
+}
 .map-container {
   position: fixed;
   width: 100%;
