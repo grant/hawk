@@ -7,7 +7,7 @@ var AuthKey = '0d53368f-1280-4f4c-b16b-ea191ec4c6a3',
 	GeoDist = require('geodist'),
 	HOME_COORD = {lat: 37.571633, lng: -122.418558},
 	RADIUS = 10,
-	delay = 300;
+	delay = 300000;
 
 var getDataRoute = function (req, res) {
 	getData(function (data) {
@@ -79,7 +79,7 @@ var getAlerts = function (cb) {
 		var result = [];
 		var lastSpeedTime = 0;
 		var lastGeoTime = 0;
-		var lastbattTime = 0;
+		var lastBattTime = 0;
 		for (var i in data) {
 			
 			var iTime = new Date(data[i].Time).getTime();
@@ -111,7 +111,7 @@ var getAlerts = function (cb) {
 				lastGeoTime = iTime;
 			}
 
-			if(data[i].BatteryLevel < 25 && lastbattTime + delay){
+			if(data[i].BatteryLevel < 25 && iTime >=  lastBattTime + delay){
 				result.push({
 					name : 'Battery Low',
 					key: 'battery',
@@ -120,7 +120,7 @@ var getAlerts = function (cb) {
 					TripId: data[i].TripId,
 					info : 'Cars Battery Level is ' + data[i].BatteryLevel + '%'
 				});
-				lastGeoTime = iTime;
+				lastBattTime = iTime;
 			}
 		}
 
