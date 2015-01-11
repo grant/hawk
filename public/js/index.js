@@ -39,6 +39,12 @@ $(function () {
     function initialize() {
       var mapCanvas = document.getElementById('map');
       var mapOptions = {
+        panControl: false,
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        overviewMapControl: false,
         center: new google.maps.LatLng(44.5403, -78.5463),
         zoom: 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP
