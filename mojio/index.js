@@ -6,7 +6,8 @@ var AuthKey = '0d53368f-1280-4f4c-b16b-ea191ec4c6a3',
 	moment = require('moment'),
 	GeoDist = require('geodist'),
 	HOME_COORD = {lat: 37.571633, lng: -122.418558},
-	RADIUS = 10;
+	RADIUS = 10,
+	delay = 300;
 
 var getDataRoute = function (req, res) {
 	getData(function (data) {
@@ -78,11 +79,12 @@ var getAlerts = function (cb) {
 		var result = [];
 		var lastSpeedTime = 0;
 		var lastGeoTime = 0;
+		var lastbattTime = 0;
 		for (var i in data) {
 			
 			var iTime = new Date(data[i].Time).getTime();
 
-			if(data[i].Speed - data[i].SpeedLimit > 5 && iTime >= lastSpeedTime + 5){
+			if(data[i].Speed - data[i].SpeedLimit > 5 && iTime >= lastSpeedTime + delay){
 				result.push({
 					name : 'Speeding',
 					key: 'speed',
@@ -97,7 +99,7 @@ var getAlerts = function (cb) {
 			var diff = GeoDist(HOME_COORD, {lat : data[i].Location.Lat, lng: data[i].Location.Lng}, {exact: true, unit: 'km'}) - RADIUS;
 			console.log({lat : data[i].Location.Lat, lng: data[i].Location.Lng});
 			console.log(diff);
-			if(diff > 0 && iTime >= lastGeoTime + 5){
+			if(diff > 0 && iTime >= lastGeoTime + delay){
 				result.push({
 					name : 'Out of Region',
 					key: 'geo',
@@ -105,6 +107,18 @@ var getAlerts = function (cb) {
 					relative_time: moment(iTime).fromNow(),
 					TripId: data[i].TripId,
 					info : 'Car is ' + Math.round(diff * 10) / 10 + 'km far from home'
+				});
+				lastGeoTime = iTime;
+			}
+
+			if(data[i].BatteryLevel < 25 && lastbattTime + delay){
+				result.push({
+					name : 'Battery Low',
+					key: 'battery',
+					time : iTime,
+					relative_time: moment(iTime).fromNow(),
+					TripId: data[i].TripId,
+					info : 'Cars Battery Level is ' + data[i].BatteryLevel + '%'
 				});
 				lastGeoTime = iTime;
 			}
