@@ -3,6 +3,7 @@
   background-color: #01DFD7;
   overflow: hidden;
   height: 100%;
+  box-shadow: 0 -2px 2px rgba(0, 0, 0,  0.1);
 }
 
 .map {
@@ -15,13 +16,14 @@
 }
 
 .set_button {
+  font-size: 23px;
   height: 60px;
   width: 60px;
   border-radius: 100%;
   float: right;
   margin-right: 8px;
   margin-top: 8px;
-  box-shadow: 1px 1px 1px black;
+  box-shadow: 0 2px 2px rgba(0, 0, 0,  0.2);
   background-color: #01DFD7;
 }
 
@@ -33,30 +35,34 @@
 }
 
 .event {
-  float: left;
   width: 100%;
-  margin-bottom: 10px;
-  margin-left: 10px;
+  padding: 20px 10px;
   display: block;
   background-color: #01DFD7;
-  padding-top: 15px;
+  overflow: hidden;
+}
 
+.icon-area {
+  float: left;
+  position: relative;
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
 }
 
 .icon {
-  height: 50px;
-  width: 50px;
+  font-size: 23px;
+  width: 100%;
+  height: 100%;
   border-radius: 100%;
   border: 1px solid white;
   float: left;
-  margin-right: 8px;
   position: relative;
-
 }
 
-.wrap {
-  width: 25px;
-  margin-left: 10px;
+.icon .fa {
+  line-height: 200%;
+  color: white;
 }
 
 .pic {
@@ -65,16 +71,9 @@
   border-radius: 100%;
   border: 1px solid white;
   position: absolute;
-  left: 45px;
-  display: inline-block;
-  margin-top: 32px;
+  right: -10px;
+  bottom: -5px;
   overflow: hidden;
-}
-
-.fa {
-  color: white;
-  margin-left: 15px;
-  margin-top: 14px;
 }
 
 .info {
@@ -90,9 +89,6 @@
 
 .time {
   float: right;
-  margin-right: 28px;
-  margin-top: 5px;
-  background-color: #01DFD7;
   font-style: italic;
   font-size: 14px;
 }
