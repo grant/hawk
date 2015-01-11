@@ -63,6 +63,9 @@ $(function () {
             $('.events.list').prepend($alert.hide().fadeIn().css('margin-top', '-90px').animate({
               'margin-top': '0'
             }, 500));
+            $.post('/twilio', {
+              msg: 'Watch your kids! ' + alert.name + '! ' + alert.info + '.'
+            });
           }
         });
       }
