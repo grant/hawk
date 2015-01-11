@@ -17,6 +17,7 @@
     "mongoose": "^3.8.21",
     "passport": "^0.2.1",
     "passport-facebook": "^1.0.3",
-    "request": "^2.51.0"
+    "request": "^2.51.0",
+    "twilio": "^1.10.0"
   }
 }

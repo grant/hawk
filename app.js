@@ -10,7 +10,7 @@ var login = require('./private/login')(passport);
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
-var mojio = require('./mojio');
+// var mojio = require('./mojio');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
@@ -52,8 +52,10 @@ app.get('/', routes.index);
 app.get('/home', routes.home);
 app.get('/auth/facebook', passport.authenticate("facebook", {scope:'email'}));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/error' }), routes.authSuccess);
-app.get('/api/getdata', mojio.getdata);
+// app.get('/api/getdata', mojio.getdata);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+require('./private/twilio');
