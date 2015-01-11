@@ -30,12 +30,11 @@
 }
 
 .map-dot {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: orange;
 }
 .map-container {
   position: fixed;

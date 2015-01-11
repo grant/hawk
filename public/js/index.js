@@ -41,6 +41,8 @@ $(function () {
 
       function updateCenter () {
         $.get('/api/location', function (location) {
+          console.log('update: ');
+          console.log(location);
           map.setCenter(google.maps.LatLng(location.lat, location.lng));
         });
       }
