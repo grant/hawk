@@ -4,9 +4,10 @@ var tophone = process.env.TO_PHONE;
 //Send an SMS text message
 client.sendMessage({
     to: tophone, // Any number Twilio can deliver to
-    from: '+16697775551', // A number you bought from Twilio and can use for outbound communication
+    from: '+12532184206', // A number you bought from Twilio and can use for outbound communication
     body: 'word to your mother.' // body of the SMS message
 }, function(err, responseData) { //this function is executed when a response is received from Twilio
+    console.log(err, responseData);
     if (!err) { // "err" is an error received during the request, if any
 
         // "responseData" is a JavaScript object containing data received from Twilio.
