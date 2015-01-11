@@ -1,12 +1,15 @@
 $(function () {
-  var ROT_STRENGTH = 20;
+  var ROT_STRENGTH = 40;
   function setupLogin () {
     var $movingBg = $('.moving-bg');
     var width = $movingBg.width();
-    var ax = 0;
+    var rotx = 0;
+    var vx = 0;
 
     function alignBg () {
-      $movingBg.css('margin-left', (ROT_STRENGTH * ax) + (-width / 2));
+      // ease vx
+      vx = (vx + rotx) / 2;
+      $movingBg.css('margin-left', (ROT_STRENGTH * vx) + (-width / 2));
     }
 
     setInterval(function () {
@@ -15,7 +18,7 @@ $(function () {
 
     if (window.DeviceMotionEvent !== undefined) {
       window.ondevicemotion = function(e) {
-        ax = e.accelerationIncludingGravity.x;
+        rotx = e.accelerationIncludingGravity.x;
       };
     }
   }
