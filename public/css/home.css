@@ -1,0 +1,107 @@
+.timeline {
+  max-width: 100%;
+  background-color: #01DFD7;
+  overflow: hidden;
+  height: 100%;
+}
+
+.map {
+  margin: 0;
+  margin-bottom: 0;
+  height: 35%;
+  background-image: url("temp_map.png");
+  clear: none;
+  width: 100%;
+}
+
+.set_button {
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  float: right;
+  margin-right: 8px;
+  margin-top: 8px;
+  box-shadow: 1px 1px 1px black;
+  background-color: #01DFD7;
+}
+
+#set {
+  color: white;
+  margin-right: 20px;
+  margin-top: 20px;
+  float: right;
+}
+
+.event {
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  display: block;
+  background-color: #01DFD7;
+  padding-top: 15px;
+
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 1px solid white;
+  float: left;
+  margin-right: 8px;
+  position: relative;
+
+}
+
+.wrap {
+  width: 25px;
+  margin-left: 10px;
+}
+
+.pic {
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  border: 1px solid white;
+  position: absolute;
+  left: 45px;
+  display: inline-block;
+  margin-top: 32px;
+  overflow: hidden;
+}
+
+.fa {
+  color: white;
+  margin-left: 15px;
+  margin-top: 14px;
+}
+
+.info {
+  float: left;
+  padding: 3px;
+  padding-left: 15px;
+}
+
+.description {
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.time {
+  float: right;
+  margin-right: 28px;
+  margin-top: 5px;
+  background-color: #01DFD7;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.option {
+  float: right;
+  margin-right: 28px;
+  margin-top: 5px;
+  background-color: #01DFD7;
+  font-size: 14px;
+  display: inline-block;
+}
