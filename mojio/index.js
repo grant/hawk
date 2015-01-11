@@ -90,7 +90,7 @@ var getalerts = function (req, res) {
 					time : new Date(data[i].Time).getTime(),
 					relative_time: moment(new Date(data[i].Time).getTime()).fromNow(),
 					TripId: data[i].TripId,
-					info : 'Car is ' + diff + 'km far from home'
+					info : 'Car is ' + Math.round(diff * 10) / 10 + 'km far from home'
 				});
 			}
 		}
