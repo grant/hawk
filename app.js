@@ -58,10 +58,6 @@ app.get('/api/alerts', mojio.getAlerts);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
-<<<<<<< HEAD
-});
-=======
 });
 
 // require('./private/twilio');
->>>>>>> 5d48fc0adebad426f2d49f0fe3f6db18dffdc965
