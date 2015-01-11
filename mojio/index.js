@@ -67,7 +67,7 @@ var getData = function (cb) {
 	});
 };
 
-var getalerts = function (req, res) {
+var getAlerts = function (cb) {
 	TripDataSchema.find({}, function(error, data){
 		data = data.filter(function(value){
 			if(value.Speed && value.SpeedLimit){
@@ -98,9 +98,14 @@ var getalerts = function (req, res) {
 			}
 		}
 
-		res.json(result);
+		cb(result);
 	});
-}
+};
+var getAlertsRoute = function (req, res) {
+	getAlerts(function (alerts) {
+		res.json(alerts);
+	});
+};
 
 module.exports = {
 
@@ -109,7 +114,8 @@ module.exports = {
 	getData: getData,
 	getDataRoute: getDataRoute,
 
-	getAlerts: getalerts,
+	getAlerts: getAlerts,
+	getAlertsRoute: getAlertsRoute,
 
 	isSpeeding: function (speed, limit) {
 		return speed - limit > 5;
