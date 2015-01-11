@@ -137,15 +137,18 @@
 
 .info .title {
   color: white;
+  font-weight: 700;
   margin-bottom: 5px;
 }
 
 .description {
+  color: #666;
   font-size: 14px;
   line-height: 1.5;
 }
 
 .time {
+  color: #666;
   float: right;
   font-style: italic;
   font-size: 14px;

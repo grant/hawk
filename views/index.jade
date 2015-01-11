@@ -49,7 +49,10 @@ block content
                     if alert.key == 'battery'
                       i.fa.fa-plug
                   .pic
-                    img(src='/img/grant.jpg', width='25px')
+                    if Math.random() > 0.5
+                      img(src='/img/ayush.jpg', width='25px')
+                    else
+                      img(src='/img/hannah.jpg', width='25px')
                 .info
                   h3.title= alert.name
                   .description= alert.info
