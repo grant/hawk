@@ -24,64 +24,66 @@ block content
         a(href='/auth/facebook')
           img.login.button(src='/img/facebook_button.png')
     .page.home(class=(page === 'home') ? 'show' : '')
-      .map
-        a(href='http://students.washington.edu/hmisenar/settings.html')
-          .set_button
-            i#set.fa.fa-gear
-      ul.timeline
-        li.event
-          .icon-area
-            .icon
-              i.fa.fa-power-off
-            .pic
-              img(src='/img/grant.jpg', width='25px')
-          .info
-            .description
-          .time  00/00/00 00:00
-        li.event
-          .icon-area
-            .icon
-              i.fa.fa-location-arrow
-            .pic
-              img(src='/img/ayush.jpg', width='25px')
-          .info
-            .description
-          .time  00/00/00 00:00
-        li.event
-          .icon-area
-            .icon
-              i.fa.fa-road
-            .pic
-              img(src='/img/hannah.jpg', width='25px')
-          .info
-            .description
-          .time  00/00/00 00:00
-        li.event
-          .icon-area
-            .icon
-              i.fa.fa-exclamation-triangle
-            .pic
-              img(src='/img/grant.jpg', width='25px')
-          .info
-            .description
-          .time  00/00/00 00:00
-        li.event
-          .icon-area
-            .icon
-              i.fa.fa-flag-checkered
-            .pic
-              img(src='/img/ayush.jpg', width='25px')
-          .info
-            .description
-          .time  00/00/00 00:00
-        .event
-          .icon-area
-            .icon
-              i.fa.fa-plug
-            .pic
-              img(src='/img/hannah.jpg', width='25px')
-          .info
-            .description
-          .time  00/00/00 00:00
-
-    .page.settings(class=(page === 'settings') ? 'show' : '')
+      .set_button
+        i.set.fa.fa-gear
+      .front-page
+        ul.list
+          li.setting-area
+      .back-page
+        ul.list
+          li.event
+            .top.line
+            .bottom.line
+            .icon-area
+              .icon
+                i.fa.fa-power-off
+              .pic
+                img(src='/img/grant.jpg', width='25px')
+            .info
+              .description
+            .time  00/00/00 00:00
+          li.event
+            .icon-area
+              .icon
+                i.fa.fa-location-arrow
+              .pic
+                img(src='/img/ayush.jpg', width='25px')
+            .info
+              .description
+            .time  00/00/00 00:00
+          li.event
+            .icon-area
+              .icon
+                i.fa.fa-road
+              .pic
+                img(src='/img/hannah.jpg', width='25px')
+            .info
+              .description
+            .time  00/00/00 00:00
+          li.event
+            .icon-area
+              .icon
+                i.fa.fa-exclamation-triangle
+              .pic
+                img(src='/img/grant.jpg', width='25px')
+            .info
+              .description
+            .time  00/00/00 00:00
+          li.event
+            .icon-area
+              .icon
+                i.fa.fa-flag-checkered
+              .pic
+                img(src='/img/ayush.jpg', width='25px')
+            .info
+              .description
+            .time  00/00/00 00:00
+          .event
+            .icon-area
+              .icon
+                i.fa.fa-plug
+              .pic
+                img(src='/img/hannah.jpg', width='25px')
+            .info
+              .description
+            .time  00/00/00 00:00

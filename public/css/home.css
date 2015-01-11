@@ -1,9 +1,13 @@
-.timeline {
-  max-width: 100%;
+.back-page .list {
+  margin-top: 300px;
+  min-height: calc(100% - 300px);
+  box-shadow: 0 -2px 2px rgba(0, 0, 0,  0.1);
+}
+
+.list {
+  width: 100%;
   background-color: #01DFD7;
   overflow: hidden;
-  height: 100%;
-  box-shadow: 0 -2px 2px rgba(0, 0, 0,  0.1);
 }
 
 .map {
@@ -15,19 +19,24 @@
   width: 100%;
 }
 
+.front-page, .back-page {
+  position: absolute;
+  width: 100%;
+}
+
 .set_button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
   font-size: 23px;
   height: 60px;
   width: 60px;
   border-radius: 100%;
-  float: right;
-  margin-right: 8px;
-  margin-top: 8px;
   box-shadow: 0 2px 2px rgba(0, 0, 0,  0.2);
   background-color: #01DFD7;
 }
 
-#set {
+.set {
   color: white;
   margin-right: 20px;
   margin-top: 20px;
@@ -38,8 +47,13 @@
   width: 100%;
   padding: 20px 10px;
   display: block;
-  background-color: #01DFD7;
   overflow: hidden;
+}
+.event:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.event:not(:first-child) {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .icon-area {
