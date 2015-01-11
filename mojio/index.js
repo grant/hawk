@@ -21,6 +21,11 @@ exports.getdata = function(req, res) {
 					}
 				});
 
+				getSpeedLimit(rawdata.Location.Lat, rawdata.Location.Lng, 
+					function(speed){
+						console.log(speed);
+					});
+
 				var tripsData = {
 					TripId: rawdata.TripId,
 					Speed: rawdata.Speed,
@@ -38,7 +43,6 @@ exports.getdata = function(req, res) {
 					TemperatureInside: rawdata.TemperatureInside,
 					TemperatureOutside: rawdata.TemperatureOutside
 				};
-				console.log(tripsData);	 //Logs DAta
 				var recordTripData = new TripDataSchema(tripsData);
 				recordTripData.save(function(error){
 					if(error){
@@ -52,11 +56,63 @@ exports.getdata = function(req, res) {
 				res.status(500).json({status: 'failtogetdata'});
 			}
 		});
+
 }
 
-var getSpeedLimit = function (lat, lng) {
-	request('http://route.st.nlp.nokia.com/routing/6.2/getlinkinfo.json?waypoint='+lat+','+lng+'&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg', 
-		function (error, response, body){
-			
-		});
+var getSpeedLimit = function (lat, lng, cb) {
+	var link = 'http://route.st.nlp.nokia.com/routing/6.2/getlinkinfo.json?waypoint='+lat+','+lng+'&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg';
+	request(link, function (error, response, body){
+		if (!error && response.statusCode == 200) {
+			var data = JSON.parse(body);
+			if(data.Response.Link[0].SpeedLimit){
+				cb(data.Response.Link[0].SpeedLimit);
+			} else if(data.Response.Link[0].DynamicSpeedInfo.BaseSpeed) {
+				console.log(data.Response.Link[0].DynamicSpeedInfo.BaseSpeed);
+				cb(data.Response.Link[0].DynamicSpeedInfo.BaseSpeed);
+			} else {
+				console.log('nope nothing');
+				cb(null);
+			}
+		} else {
+			console.log('didnt get the here api data');
+			cb(null);
+		}
+	});
 }
+
+module.exports = {
+
+	getSpeedLimit: function (lat, lng, cb) {
+		var link = 'http://route.st.nlp.nokia.com/routing/6.2/getlinkinfo.json?waypoint='+lat+','+lng+'&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg';
+		request(link, function (error, response, body){
+			if (!error && response.statusCode == 200) {
+				var data = JSON.parse(body);
+				if(data.Response.Link[0].SpeedLimit){
+					cb(data.Response.Link[0].SpeedLimit);
+				} else if(data.Response.Link[0].DynamicSpeedInfo.BaseSpeed) {
+					console.log(data.Response.Link[0].DynamicSpeedInfo.BaseSpeed);
+					cb(data.Response.Link[0].DynamicSpeedInfo.BaseSpeed);
+				} else {
+					console.log('nope nothing');
+					cb(null);
+				}
+			} else {
+				console.log('didnt get the here api data');
+				cb(null);
+			}
+		});
+	}
+
+	isSpeeding: function(speed, limit) {
+		return speed - limit > 5;
+	}
+
+	isOutOfRegion: function(home, loc, radius){
+		
+	}
+}; 
+
+
+
+
+
