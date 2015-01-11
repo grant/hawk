@@ -101,7 +101,7 @@ var getAlerts = function (cb) {
 					time : iTime,
 					relative_time: moment(iTime).fromNow(),
 					TripId: data[i].TripId,
-					info : 'Car is going at ' + data[i].Speed + 'kmph and the Speed Limit is ' + data[i].SpeedLimit + 'kmph'
+					info : 'Car is going at ' + data[i].Speed + ' kph and the Speed Limit is ' + data[i].SpeedLimit + 'kmph'
 				});
 				lastSpeedTime = iTime;
 			}
@@ -114,7 +114,7 @@ var getAlerts = function (cb) {
 					time : iTime,
 					relative_time: moment(iTime).fromNow(),
 					TripId: data[i].TripId,
-					info : 'Car is ' + Math.round(diff * 10) / 10 + 'km far from home'
+					info : 'Car is ' + Math.round(diff * 10) / 10 + ' km away from home'
 				});
 				lastGeoTime = iTime;
 			}
