@@ -4,7 +4,9 @@
  */
 
 exports.index = function(req, res){
-  res.render('index');
+  res.render('index', {
+    page: 'login'
+  });
 };
 
 exports.authError = function(req, res) {
@@ -12,5 +14,7 @@ exports.authError = function(req, res) {
 };
 
 exports.authSuccess = function(req, res) {
-  res.send('hi');
+  res.render('index', {
+    page: 'home'
+  });
 };

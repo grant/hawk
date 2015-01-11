@@ -1,17 +1,17 @@
 extends layout
 
 block css
-  link(rel="stylesheet" href='css/font.css')
-  link(rel="stylesheet" href='css/reset.css')
-  link(rel="stylesheet" href='css/index.css')
+  link(rel="stylesheet" href='/css/font.css')
+  link(rel="stylesheet" href='/css/reset.css')
+  link(rel="stylesheet" href='/css/index.css')
 
 block js
   script(src='//code.jquery.com/jquery-1.11.2.min.js')
-  script(src="js/index.js")
+  script(src="/js/index.js")
 
 block content
   .viewport
-    .page.login.show
+    .page.login(class=(page === 'login') ? 'show' : '')
       .bg
         .shadow
         .center
@@ -21,5 +21,5 @@ block content
         h1.title HAWK
         a(href='/auth/facebook')
           img.login.button(src='/img/facebook_button.png')
-    .page.home
-    .page.settings
+    .page.home(class=(page === 'home') ? 'show' : '')
+    .page.settings(class=(page === 'settings') ? 'show' : '')
