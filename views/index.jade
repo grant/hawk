@@ -1,5 +1,15 @@
 extends layout
 
+block css
+  link(rel="stylesheet" href='css/reset.css')
+  link(rel="stylesheet" href='css/index.css')
+
+block js
+  script(src="js/index.js")
+
 block content
-  h1= title
-  p HAWK to #{title}
+  .viewport
+    .page.login.show
+      img.logo(src='/img/')
+    .page.home
+    .page.settings
