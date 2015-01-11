@@ -3,7 +3,9 @@ var AuthKey = '0d53368f-1280-4f4c-b16b-ea191ec4c6a3',
 	TripDataSchema = require('../private/models/tripdata'),
 	TripSchema = require('../private/models/trips'),
 	AlertSchema = require('../private/models/alerts'),
-	GeoDist = require('geodist');
+	GeoDist = require('geodist'),
+	HOME_COORD = {lat: 37.771633, lng: -122.418558},
+	RADIUS = 10;
 
 var getdata = function(req, res) {
 	request({
@@ -59,8 +61,39 @@ var getdata = function(req, res) {
 		});
 }
 
-var getalerts = function(req, res) {
+var getalerts = function (req, res) {
+	TripDataSchema.find({}, function(error, data){
+		data = data.filter(function(value){
+			if(value.Speed && value.SpeedLimit){
+				return true;
+			}
+		});
+		var result = [];
+		for (var i in data) {
+			if(data[i].Speed - data[i].SpeedLimit > 5){
+				result.push({
+					name : 'Speeding',
+					time : data[i].Time,
+					info : 'Car is going at ' + data[i].Speed + ' and the Speed Limit is ' + data[i].SpeedLimit
+				});
+			}
 
+			var diff = GeoDist(HOME_COORD, {lat : data[i].Location.Lat, lng: data[i].Location.Lng}, {exact: true, unit: 'km'}) - RADIUS;
+			console.log({lat : data[i].Location.Lat, lng: data[i].Location.Lng});
+			console.log(diff);
+			if(diff > 0){
+				result.push({
+					name : 'Out of Region',
+					time : data[i].Time,
+					info : 'Car is ' + diff + 'km far from home'
+				});
+			}
+		}
+
+
+
+		res.json(result);
+	});
 }
 
 module.exports = {
