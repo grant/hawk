@@ -70,28 +70,37 @@ var getalerts = function (req, res) {
 			}
 		});
 		var result = [];
+		var lastSpeedTime = 0;
+		var lastGeoTime = 0;
 		for (var i in data) {
-			if(data[i].Speed - data[i].SpeedLimit > 5){
+			
+			var iTime = new Date(data[i].Time).getTime();
+
+			if(data[i].Speed - data[i].SpeedLimit > 5 && iTime >= lastSpeedTime + 5){
 				result.push({
 					name : 'Speeding',
-					time : new Date(data[i].Time).getTime(),
-					relative_time: moment(new Date(data[i].Time).getTime()).fromNow(),
+					key: 'speed',
+					time : iTime,
+					relative_time: moment(iTime).fromNow(),
 					TripId: data[i].TripId,
 					info : 'Car is going at ' + data[i].Speed + 'kmph and the Speed Limit is ' + data[i].SpeedLimit + 'kmph'
 				});
+				lastSpeedTime = iTime;
 			}
 
 			var diff = GeoDist(HOME_COORD, {lat : data[i].Location.Lat, lng: data[i].Location.Lng}, {exact: true, unit: 'km'}) - RADIUS;
 			console.log({lat : data[i].Location.Lat, lng: data[i].Location.Lng});
 			console.log(diff);
-			if(diff > 0){
+			if(diff > 0 && iTime >= lastGeoTime + 5){
 				result.push({
 					name : 'Out of Region',
-					time : new Date(data[i].Time).getTime(),
-					relative_time: moment(new Date(data[i].Time).getTime()).fromNow(),
+					key: 'geo',
+					time : iTime,
+					relative_time: moment(iTime).fromNow(),
 					TripId: data[i].TripId,
 					info : 'Car is ' + Math.round(diff * 10) / 10 + 'km far from home'
 				});
+				lastGeoTime = iTime;
 			}
 		}
 
