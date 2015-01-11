@@ -47,7 +47,7 @@ module.exports = function (passport) {
             accessToken: accessToken,
             email: profile.emails[0].value,
             name: profile.displayName,
-            photo: profile.photos[0].value,
+            photo: 'http://graph.facebook.com/' + profile.id + '/picture?width=800',
             username: profile.emails[0].value.split('@')[0],
           }).save(function(err, newUser) {
             if (err) return done(err);
