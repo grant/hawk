@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 module.exports = mongoose.model('tripdata', {
 	TripId: String,
 	Speed: Number,
+	SpeedLimit: Number,
 	Distance: Number,
 	Odometer: Number,
 	FuelEfficiency: Number,
