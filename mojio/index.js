@@ -73,7 +73,7 @@ var getalerts = function (req, res) {
 			if(data[i].Speed - data[i].SpeedLimit > 5){
 				result.push({
 					name : 'Speeding',
-					time : data[i].Time,
+					time : new Date(data[i].Time).getTime(),
 					TripId: data[i].TripId,
 					info : 'Car is going at ' + data[i].Speed + ' and the Speed Limit is ' + data[i].SpeedLimit
 				});
@@ -85,14 +85,12 @@ var getalerts = function (req, res) {
 			if(diff > 0){
 				result.push({
 					name : 'Out of Region',
-					time : data[i].Time,
+					time : new Date(data[i].Time).getTime(),
 					TripId: data[i].TripId,
 					info : 'Car is ' + diff + 'km far from home'
 				});
 			}
 		}
-
-
 
 		res.json(result);
 	});
