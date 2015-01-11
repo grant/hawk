@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "connect-mongo": "^0.5.3",
+    "bmw-js": "^2.2.6",
     "dotenv": "^0.4.0",
     "express": "3.4.8",
     "express-session": "^1.10.1",
