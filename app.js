@@ -5,6 +5,7 @@
 
 var express = require('express');
 var passport = require('passport');
+var mongoose = require('mongoose');
 var login = require('./private/login')(passport);
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -32,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+mongoose.connect(process.env.MONGOLAB_URI);
 
 app.get('/', routes.index);
 app.get('/auth/facebook', passport.authenticate("facebook", {scope:'email'}));

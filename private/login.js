@@ -33,6 +33,7 @@ module.exports = function (passport) {
       profileFields: ['id', 'emails', 'displayName', 'photos']
     },
     function(accessToken, refreshToken, profile, done) {
+      console.log('lookup user');
       User.findOne({$or: [{fbId : profile.id }, {email: profile.emails[0].value}]}, function(err, oldUser) {
         if (oldUser) {
           console.log("old user detected");
