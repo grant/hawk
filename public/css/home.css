@@ -1,31 +1,43 @@
-.back-page .list {
-  margin-top: 300px;
+
+
+.scroll-area {
+  position: absolute;
   min-height: calc(100% - 300px);
+  width: 100%;
+  transition: margin-top 1s;
+}
+
+.back-page:not(.map-view) .scroll-area {
+  margin-top: 300px;
+}
+.back-page.map-view .scroll-area {
+  margin-top: 100%;
+}
+.back-page .list {
   box-shadow: 0 -2px 2px rgba(0, 0, 0,  0.1);
 }
 
 .list {
   width: 100%;
-  background-color: #01DFD7;
-  overflow: hidden;
+  background-color: rgba(1,223,215, .9);
 }
 
 .map {
-  margin: 0;
-  margin-bottom: 0;
-  height: 35%;
-  background-image: url("temp_map.png");
-  clear: none;
   width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: blue;
+  position: fixed;
 }
 
 .front-page, .back-page {
   position: absolute;
   width: 100%;
+  height: 100%;
 }
 
 .set.button {
-  position: absolute;
+  position: fixed;
   top: 8px;
   right: 8px;
   font-size: 23px;

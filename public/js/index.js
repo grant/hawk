@@ -29,5 +29,14 @@ $(function () {
     clearInterval(rotateInterval);
   }
 
+  function setupHome () {
+    console.log('hi');
+    $('.map').click(function (e) {
+      $('.back-page').toggleClass('map-view');
+    });
+  }
+
   setupLogin();
+  setupHome();
+
 });
