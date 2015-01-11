@@ -14,7 +14,7 @@ var mojio = require('./mojio');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser')
-
+var twilio = require('./private/twilio');
 
 var app = express();
 require('dotenv').load();
@@ -57,6 +57,10 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
 app.get('/api/getdata', mojio.getDataRoute);
 app.get('/api/alerts', mojio.getAlertsRoute);
 app.get('/api/location', mojio.getLocation);
+app.post('/twilio', function(req, res){
+	twilio(req.body.msg);
+	res.send({status: 200});
+});
 
 setInterval(function () {
   mojio.getData(function (data) {
@@ -68,4 +72,3 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-// require('./private/twilio');
