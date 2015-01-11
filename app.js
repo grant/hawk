@@ -55,6 +55,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
 app.get('/api/getdata', mojio.getDataRoute);
 app.get('/api/alerts', mojio.getAlerts);
 
+setInterval(mojio.getData, 3000);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
