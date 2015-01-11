@@ -5,11 +5,18 @@ block css
   link(rel="stylesheet" href='css/index.css')
 
 block js
+  script(src='//code.jquery.com/jquery-1.11.2.min.js')
   script(src="js/index.js")
 
 block content
   .viewport
     .page.login.show
-      img.logo(src='/img/')
+      .bg
+        .shadow
+        .center
+          img.moving-bg(src='/img/background.jpg')
+      .fg
+        img.logo(src='/img/logo.svg')
+        img.login.button(src='/img/facebook_button.png')
     .page.home
     .page.settings

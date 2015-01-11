@@ -3,10 +3,59 @@
   height: 100%;
 }
 
+.button {
+  cursor: pointer;
+}
+
 .page {
   position: absolute;
 }
 
 .page:not(.show) {
   display: none;
+}
+
+.page.login .bg, .page.login .fg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.page.login .center {
+  margin-left: 50%;
+  height: 100%;
+}
+
+.page.login .shadow {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+}
+
+.moving-bg {
+  height: 100%;
+}
+
+.page.login .logo {
+  width: 50%;
+  left: 25%;
+}
+
+.page.login .login.button {
+  width: 90%;
+  left: 5%;
+}
+
+.page.login .logo, .page.login .login.button {
+  position: absolute;
+  margin: 0 auto;
+}
+
+.page.login .logo {
+  top: 10%;
+}
+
+.page.login .login.button {
+  bottom: 10%;
 }
