@@ -1,3 +1,4 @@
+var request = require('request');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('./models/user');
 
@@ -25,6 +26,16 @@ module.exports = function (passport) {
       }
     });
   });
+
+  function getFriends(accessToken, callback) {
+    console.log(accessToken);
+    request('https://graph.facebook.com/me?fields=friends&limit=1000&access_token='+accessToken,
+      function(err, resp, body) {
+        body = JSON.parse(body);
+        console.log(body);
+        callback(body.friends.data);
+      });
+  }
 
   passport.use(new FacebookStrategy({
       clientID: process.env.FACEBOOK_APP_ID,
