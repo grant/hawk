@@ -8,7 +8,6 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var login = require('./private/login')(passport);
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
