@@ -13,6 +13,7 @@ var path = require('path');
 var mojio = require('./mojio');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var bodyParser = require('body-parser')
 
 
 var app = express();
@@ -28,6 +29,7 @@ app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
