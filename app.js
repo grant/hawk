@@ -10,9 +10,13 @@ var login = require('./private/login')(passport);
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 require('dotenv').load();
+
+mongoose.connect(process.env.MONGOLAB_URI);
 
 // all environments
 
@@ -24,7 +28,15 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.cookieParser());
+app.use(session({
+    secret: 'foo',
+    store: new MongoStore({
+      url: process.env.MONGOLAB_URI
+    })
+}));
 app.use(passport.initialize());
+app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -33,7 +45,6 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-mongoose.connect(process.env.MONGOLAB_URI);
 
 app.get('/', routes.index);
 app.get('/auth/facebook', passport.authenticate("facebook", {scope:'email'}));
