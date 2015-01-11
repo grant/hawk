@@ -8,6 +8,7 @@ block css
   link(rel="stylesheet" href='/css/home.css')
 
 block js
+  script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw0Xu5s4PUErf5IhJVhKXRoJoLSf-u7hM")
   script(src='//code.jquery.com/jquery-1.11.2.min.js')
   script(src="/js/index.js")
 
@@ -30,7 +31,7 @@ block content
         ul.list
           li.setting-area
       .back-page
-        .map
+        .map#map
         .scroll-area
           ul.events.list
             for alert in alerts
