@@ -1,5 +1,5 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
-var User = require('mongoose').model('User');
+var User = require('./user');
 
 module.exports = function (passport) {
   /*
@@ -23,7 +23,7 @@ module.exports = function (passport) {
       } else {
         done(err, null);
       }
-    })
+    });
   });
 
   passport.use(new FacebookStrategy({
